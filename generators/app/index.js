@@ -27,19 +27,28 @@ module.exports = yeoman.generators.Base.extend({
             'Welcome to the ' + chalk.red('JHipster Google Analytics') + ' generator!'
         ));
 
+        var questions = 2;
+
         var prompts = [
             {
-                type: 'checkbox',
-                name: 'modules',
-                message: 'Which module do you like to install on your JHipster application?',
-                choices: [
-                    {name: 'Install all modules', value: 'all'},
-                    {name: 'Font Awesome', value: 'fontAwesome'},
-                    {name: 'Awesome Bootstrap Checkbox (+Font Awesome)', value: 'awesomeBootstrapCheckbox'},
-                    {name: 'NGSwitchery', value: 'switchery'},
-                    {name: 'Angular Bootstrap Slider', value: 'angularBootstrapSlider'}
-                ],
-                default: 'none'
+                type: 'input',
+                name: 'googleAnalyticsId',
+                validate: function (input) {
+                    if (/(UA|YT|MO)-\d+-\d+/i.test(input)) return true;
+                    return 'Hum! Strange, it\'s didn\'t look like to a Google analytics tracking ID, normaly it\'s like \'UA-12345678-9\'';
+                },
+                message: '(1/' + questions + ') What is your Google analytics tracking ID?',
+                default: ''
+            },
+            {
+                type: 'input',
+                name: 'domainName',
+                validate: function (input) {
+                    if (/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(input)) return true;
+                    return 'Bizarre, it\'s didn\'t look like to a domain name, normaly it\'s like \'mydomainname.com\'';
+                },
+                message: '(2/' + questions + ') What is the domain name of your application?',
+                default: ''
             }
         ];
 
@@ -57,24 +66,27 @@ module.exports = yeoman.generators.Base.extend({
         this.baseName = jhipsterVar.baseName;
         this.packageName = jhipsterVar.packageName;
         this.angularAppName = jhipsterVar.angularAppName;
-        this.modules = this.props.modules;
+        this.frontendBuilder = jhipsterVar.frontendBuilder;
+
+        this.googleAnalyticsId = this.props.googleAnalyticsId;
+        this.domainName = this.props.domainName;
 
         jhipsterFunc.addBowerDependency('angular-google-analytics', '1.1.4');
         jhipsterFunc.addAngularJsModule('angular-google-analytics');
 
-        var config = "AnalyticsProvider.setAccount('UA-32687734-5');\n" +
+        var config = "AnalyticsProvider.setAccount('"+googleAnalyticsId+"');\n" +
             "AnalyticsProvider.trackPages(true);\n" +
-            "AnalyticsProvider.setDomainName('alantaya.com');\n" +
+            "AnalyticsProvider.setDomainName('"+domainName+"');\n" +
             "AnalyticsProvider.setPageEvent('$stateChangeSuccess');\n" +
             "AnalyticsProvider.useCrossDomainLinker(true);\n" +
-            "AnalyticsProvider.setCrossLinkDomains(['alantaya.com']);";
+            "AnalyticsProvider.setCrossLinkDomains(['"+domainName+"']);";
+
         jhipsterFunc.addAngularJsConfig(['AnalyticsProvider'], config, 'Google analytics configuration');
 
         done();
     },
 
     install: function () {
-        this.frontendBuilder = jhipsterVar.frontendBuilder;
         var injectDependenciesAndConstants = function () {
             switch (this.frontendBuilder) {
                 case 'gulp':

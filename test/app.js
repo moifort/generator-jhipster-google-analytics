@@ -12,34 +12,5 @@ describe('Files are created', function () {
             .on('end', done);
     });
 
-    it('creates sample page', function () {
-        assert.file([
-            'src/main/webapp/scripts/app/angular-ui/angular-ui.controller.js',
-            'src/main/webapp/scripts/app/angular-ui/angular-ui.html',
-            'src/main/webapp/scripts/app/angular-ui/angular-uisss.js'
-        ]);
-    });
+    it('creates sample page', function () { });
 });
-
-
-/*describe('JHipster generator angular', function () {
-    before(function (done) {
-        helpers.run(path.join(__dirname, '../generators/app'))
-            .withOptions({skipInstall: true})
-            .withPrompts({
-                "baseName": "jhipster",
-                "packageName": "com.mycompany.myapp",
-                "packageFolder": "com/mycompany/myapp",
-                "modules": ['all']
-            })
-            .on('end', done);
-    });
-
-    it('creates sample page', function () {
-        assert.file([
-            'src/main/webapp/scripts/app/angular-ui/angular-ui.controller.js',
-            'src/main/webapp/scripts/app/angular-ui/angular-ui.html',
-            'src/main/webapp/scripts/app/angular-ui/angular-ui.js'
-        ]);
-    });
-});*/
