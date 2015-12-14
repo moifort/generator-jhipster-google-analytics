@@ -1,7 +1,7 @@
 {
   "name": "generator-jhipster-google-analytics",
   "version": "0.0.1",
-  "description": "Install Google analytics your JHipster app",
+  "description": "Install Google analytics on your JHipster app",
   "homepage": "https://github.com/moifort/generator-jhipster-google-analytics",
   "author": {
     "name": "Thibaut Mottet",
