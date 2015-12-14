@@ -26,7 +26,7 @@ yo jhipster-google-analytics
 
 This service lets you integrate google analytics tracker in your AngularJS applications easily.
 
-- Github: ![revolunet/angular-google-analytics](https://github.com/revolunet/angular-google-analytics)
+- Github: https://github.com/revolunet/angular-google-analytics
 
 ## License
 
