@@ -37,8 +37,7 @@ module.exports = yeoman.generators.Base.extend({
                     if (/(UA|YT|MO)-\d+-\d+/i.test(input)) return true;
                     return 'Hum! Strange, it\'s didn\'t look like to a Google analytics tracking ID, normaly it\'s like \'UA-12345678-9\'';
                 },
-                message: '(1/' + questions + ') What is your Google analytics tracking ID?',
-                default: ''
+                message: '(1/' + questions + ') What is your Google analytics tracking ID?'
             },
             {
                 type: 'input',
@@ -47,8 +46,7 @@ module.exports = yeoman.generators.Base.extend({
                     if (/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/.test(input)) return true;
                     return 'Bizarre, it\'s didn\'t look like to a domain name, normaly it\'s like \'mydomainname.com\'';
                 },
-                message: '(2/' + questions + ') What is the domain name of your application?',
-                default: ''
+                message: '(2/' + questions + ') What is the domain name of your application?'
             }
         ];
 
@@ -74,12 +72,12 @@ module.exports = yeoman.generators.Base.extend({
         jhipsterFunc.addBowerDependency('angular-google-analytics', '1.1.4');
         jhipsterFunc.addAngularJsModule('angular-google-analytics');
 
-        var config = "AnalyticsProvider.setAccount('"+googleAnalyticsId+"');\n" +
+        var config = "AnalyticsProvider.setAccount('"+this.googleAnalyticsId+"');\n" +
             "AnalyticsProvider.trackPages(true);\n" +
-            "AnalyticsProvider.setDomainName('"+domainName+"');\n" +
+            "AnalyticsProvider.setDomainName('"+this.domainName+"');\n" +
             "AnalyticsProvider.setPageEvent('$stateChangeSuccess');\n" +
             "AnalyticsProvider.useCrossDomainLinker(true);\n" +
-            "AnalyticsProvider.setCrossLinkDomains(['"+domainName+"']);";
+            "AnalyticsProvider.setCrossLinkDomains(['"+this.domainName+"']);";
 
         jhipsterFunc.addAngularJsConfig(['AnalyticsProvider'], config, 'Google analytics configuration');
 
