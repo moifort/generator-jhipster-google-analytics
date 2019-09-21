@@ -1,3 +1,5 @@
+**DEPRECATED this repository is no longer maintained**
+
 # generator-jhipster-google-analytics
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > Install easily and get sample code of the most famous AngularUI library on your JHipster application.
